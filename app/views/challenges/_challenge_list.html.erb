@@ -1,0 +1,33 @@
+<% if challenge.relationship.receiver.user == current_user %>
+  <% target = challenge.relationship.sender %>
+<% else %>
+  <% target = challenge.relationship.receiver %>
+<% end %>
+
+<div class="challenges-list">
+
+  <div class="list-image">
+    <% if target.user.photos.attached? %>
+      <%= cl_image_tag target.user.photos.first.key %>
+    <% else %>
+      <%= image_tag "https://cdn.sortiraparis.com/images/61/1665/838944-solidays-2023-a-paris-ouverture-de-la-billetterie-debut-fevrier.jpg", class:"event-img" %>
+    <% end %>
+  </div>
+
+  <div class="list-content border-top w-100">
+    <div class="list-content-main">
+      <h4><%= target.user.first_name %></h4>
+      <p><%= challenge.reward.title %></p>
+    </div>
+
+    <div class="list-content-secondary">
+      <% if challenge.updated_at.strftime("%D") == Date.today.strftime("%D") %>
+        <span><%= challenge.updated_at.strftime("%I:%M%p") %></span>
+      <% else %>
+        <span><%= challenge.updated_at.strftime("%D") %></span>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
